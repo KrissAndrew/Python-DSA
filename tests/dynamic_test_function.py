@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add the parent directory to sys.path (Ensures Python finds `tests/`)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 def run_tests(func, test_cases):
     """
     Runs test cases on the provided function and prints results.

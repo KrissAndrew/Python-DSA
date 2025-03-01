@@ -22,14 +22,7 @@ def is_palindrome_reverse(s: str) -> bool:
 
 if __name__ == "__main__":
 
-    import sys
-    import os
-
-    # Add the parent directory to sys.path (Ensures Python finds `tests/`)
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-    # Now imports work!
-    from tests.simple_python_test_structure import run_tests
+    from tests.dynamic_test_function import run_tests
 
     test_cases = [
         # Basic cases
