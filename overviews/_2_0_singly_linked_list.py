@@ -1,8 +1,8 @@
 ### SINGLY LINKED LISTS ###
 
-# Linked lists are data structures where elements (nodes) are connected via pointers, rather than stored contiguously in memory. 
-# This structure offers dynamic memory usage and can efficiently handle insertions and deletions.
-# Unlike arrays, linked lists can grow or shrink during execution, making them ideal when the maximum number of elements isn’t known in advance.
+# Elements (nodes) are connected via pointers, rather than stored contiguously in memory. 
+# Allows for dynamic memory usage and can efficiently handle insertions and deletions.
+# Unlike arrays, linked lists can grow or shrink during execution, ideal when the maximum number of elements isn’t known in advance.
 
 # Advantages
 # Efficient Insertions/Deletions: Inserting or deleting a node (especially at the beginning or in the middle) can be done in constant time, O(1), if you have the appropriate pointer.
@@ -42,6 +42,20 @@ class SinglyLinkedList:
         self.head = None
         self.tail = None
         self.length = 0
+
+
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
+
+    def __reversed__(self):
+        self.reverse_list()
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
 
     # O(1) - Simply point the new node to the head or assign it if no head exists
     def insert_at_beginning(self, data): 
@@ -114,11 +128,10 @@ class SinglyLinkedList:
                 prev = current
                 current = current.next
 
-            data = current.data
             prev.next = None
             self.tail = prev
             self.length -= 1
-            return data
+            return current.data
     
     # O(n) - iterate over all items
     def display_list(self):
@@ -153,27 +166,39 @@ class SinglyLinkedList:
 
 if __name__ == "__main__":
     # Initilize single linked list
-    SLL = SinglyLinkedList()
+    sll = SinglyLinkedList()
     arr = [1,2,3,4,5]
     print("generate_list_from_array")
-    SLL.generate_list_from_array(arr)
-    SLL.display_list()
-    SLL.delete_node(3)
-    
+    sll.generate_list_from_array(arr)
+    sll.display_list()
+
+    # Forward iteration using __iter__
+    print("Forward iteration:")
+    for data in sll:
+        print(data, end=" ")
+    print()
+
+    # Reverse iteration using __reversed__
+    print("Reverse iteration:")
+    for data in reversed(sll):
+        print(data, end=" ")
+    print()
+
+    sll.delete_node(3)
     print("\ndelete_node(3)")
-    SLL.display_list()
+    sll.display_list()
     
     print("\nreverse_list()")
-    SLL.reverse_list()
-    SLL.display_list()
+    sll.reverse_list()
+    sll.display_list()
 
     print("\ninsert_at_beginning(3)")
-    SLL.insert_at_beginning(3)
-    SLL.display_list()
+    sll.insert_at_beginning(3)
+    sll.display_list()
     
     print("\ninsert_at_end(1)")
-    SLL.insert_at_end(1)
-    SLL.display_list()
+    sll.insert_at_end(1)
+    sll.display_list()
 
-    print("\npop() -> " + str(SLL.pop()))
-    SLL.display_list()
+    print("\npop() -> " + str(sll.pop()))
+    sll.display_list()
