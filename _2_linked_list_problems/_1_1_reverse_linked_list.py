@@ -1,22 +1,33 @@
-import sys
-import os
+# Construct an in-place (without extra memory) algorithm to find and return the middle node of a linked list
+# Must be O(N) (linear) running time
+# Examples: [1, 2, 3, 4] --> middle node is: 2,   [1, 2, 3, 4, 5] --> middle node is: 3
 
-# Add the parent directory to sys.path (Ensures Python finds `tests/`)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# For the sake of this I will implement a find_middle_node() function in my linked list classes
 
-def run_tests(func, test_cases):
-    """
-    Runs test cases on the provided function and prints results.
+if __name__ == "__main__":
+
+    from overviews._2_0_singly_linked_list import SinglyLinkedList
     
-    :param func: Function to be tested.
-    :param test_cases: List of tuples (input(s), expected_output).
-    """
+    ssl = SinglyLinkedList()
+    ssl.generate_list_from_array([])
+
+    test_cases = [
+        ([], Exception),             # 1
+        ([1], [1]),                  # 2
+        ([1, 2, 3], [3, 2, 1]),      # 3
+        ([1, 2, 3, 4], [4, 3, 2, 1]) # 4
+    ]
+
     all_passed = True
     for i, (inputs, expected) in enumerate(test_cases, start=1):
         try:
             # If inputs is a tuple, unpack it; otherwise, pass it as a single argument
-            result = func(*inputs) if isinstance(inputs, tuple) else func(inputs)
-
+            ssl = SinglyLinkedList()
+            ssl.generate_list_from_array(*inputs) if isinstance(inputs, tuple) else ssl.generate_list_from_array(inputs)
+            result = []
+            ssl.reverse_list()
+            for i in ssl:
+                result.append(i.data)
             if result != expected:
                 all_passed = False
                 print(f"❌ Test {i} Failed | Input: {inputs} | Expected: {expected}, Got: {result}")

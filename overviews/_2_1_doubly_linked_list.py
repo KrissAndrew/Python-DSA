@@ -19,9 +19,11 @@
 
 # Efficient Deletion or Insertion: When you need to remove or insert nodes frequently, especially in the middle of the list.
 # Having a pointer to the previous node lets you perform these operations in O(1) time. 
-#! Note - This is only true when the node to be deleted is know - which is often not the case
+#! Note - This is only true when the node to be deleted is known - which is often not the case
 # In a singly linked list, you often have to traverse from the head to find the previous node, which adds overhead.
 
+
+### Doubly Linked List Class Implementation ###
 
 class DoublyLinkedList:
     class Node:

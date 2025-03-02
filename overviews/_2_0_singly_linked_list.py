@@ -1,4 +1,4 @@
-### SINGLY LINKED LISTS ###
+### SINGLY LINKED LIST ###
 
 # Elements (nodes) are connected via pointers, rather than stored contiguously in memory. 
 # Allows for dynamic memory usage and can efficiently handle insertions and deletions.
@@ -27,7 +27,6 @@
 # Delete item at front/end O(1) - Simply shift and undate pointers
 # Delete item at arbitrary position O(n)
 
-
 ### Singly Linked List Class Implementation ###
 
 # Node: Each element in a linked list is a node that contains data and one or more pointers (or references) to the next node (and possibly the previous node).
@@ -43,21 +42,22 @@ class SinglyLinkedList:
         self.tail = None
         self.length = 0
 
-
     def __iter__(self):
         current = self.head
         while current:
-            yield current.data
+            yield current
             current = current.next
 
     def __reversed__(self):
         self.reverse_list()
         current = self.head
         while current:
-            yield current.data
+            yield current
             current = current.next
+        # Restore original order
+        self.reverse_list()
 
-    # O(1) - Simply point the new node to the head or assign it if no head exists
+    # O(1) - point the new node to the head or assign it if no head exists
     def insert_at_beginning(self, data): 
         new_node = self.Node(data)
         new_node.next = self.head
@@ -67,7 +67,7 @@ class SinglyLinkedList:
             self.tail = new_node
         self.length += 1
 
-    # O(1) - Simply point the new node to the head or assign it if no head exists
+    # O(1) - point the new node to the head or assign it if no head exists
     def insert_at_end(self, data):
         new_node = self.Node(data)
         if self.tail:
@@ -78,12 +78,18 @@ class SinglyLinkedList:
             self.head = new_node
             self.tail = new_node
         self.length += 1
+
+    # O(n) - needs to assign new node items for each item in provided array
+    def generate_list_from_array(self, array):
+        self.head = None
+        self.tail = None
+        for data in array:
+            self.insert_at_end(data)
     
     # O(n) - the item may be at the end of the list
     def delete_node(self, key):
         if self.length == 0:
-            print("Linked list is empty. Nothing to delete.")
-            return
+            raise Exception("Linked list is empty. Nothing to delete.")
         
         prev = None
         current = self.head
@@ -109,8 +115,7 @@ class SinglyLinkedList:
     # O(n) - disadvantage of singly linked lists, popping must traverse entire data structure
     def pop(self):
         if self.length == 0:
-            print("Linked list is empty. Nothing to pop.")
-            return None
+            raise Exception("Linked list is empty. Nothing to pop.")
         
         elif self.length == 1:
             data = self.tail.data
@@ -136,23 +141,18 @@ class SinglyLinkedList:
     # O(n) - iterate over all items
     def display_list(self):
         if self.length == 0:
-            print("Linked list is empty. Nothing to display.")
+            raise Exception("Linked list is empty. Nothing to display.")
         else:
             current = self.head
             while current:
                 print(current.data, end=" -> ")
                 current = current.next
             print("None")
-    
-    # O(n) - needs to assign new node items for each item in provided array
-    def generate_list_from_array(self, array):
-        for data in array:
-            self.insert_at_end(data)
 
     # O(n) - must traverse entire array
     def reverse_list(self):
         if self.length == 0:
-            print("Linked list is empty. Nothing to reverse.")
+            raise Exception("Linked list is empty. Nothing to reverse.")
         else:
             prev = None
             current = self.head
@@ -163,6 +163,46 @@ class SinglyLinkedList:
                 current.next = prev
                 prev = current
                 current = next_node
+
+    # Getters
+
+    # Can get directly but should be avoided
+    def get_head_node(self):
+        if self.head: return self.head
+
+    def get_tail_node(self):
+        if self.tail: return self.tail
+    
+    # O(N) linear running time complexity
+    def get_middle_node(self):
+        if self.length == 0:
+            raise Exception("Linked list is empty. Nothing to display.")
+        elif self.length == 1:
+            return self.head
+        
+        fast_pointer = self.head
+        slow_pointer = self.head
+
+        while fast_pointer.next and fast_pointer.next.next:
+            fast_pointer = fast_pointer.next.next
+            slow_pointer = slow_pointer.next
+
+        return slow_pointer
+    
+    # Setters
+
+    def set_head_data(self, data):
+        if self.head:
+            self.head.data = data
+        else:
+            raise Exception("Linked list is empty. Cannot set head data.")
+
+    def set_tail_data(self, data):
+        if self.tail:
+            self.tail.data = data
+        else:
+            raise Exception("Linked list is empty. Cannot set tail data.")
+    
 
 if __name__ == "__main__":
     # Initilize single linked list
@@ -201,4 +241,8 @@ if __name__ == "__main__":
     sll.display_list()
 
     print("\npop() -> " + str(sll.pop()))
+    sll.display_list()
+
+    print("\nget_middle_node()")
+    print(sll.get_middle_node().data)
     sll.display_list()
