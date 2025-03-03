@@ -80,7 +80,7 @@ class SinglyLinkedList:
         self.length += 1
 
     # O(n) - needs to assign new node items for each item in provided array
-    def generate_list_from_array(self, array):
+    def generate_list_from_array(self, array: list[int]):
         self.head = None
         self.tail = None
         for data in array:

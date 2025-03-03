@@ -19,15 +19,17 @@ if __name__ == "__main__":
     ]
 
     all_passed = True
+    ssl = SinglyLinkedList()
     for i, (inputs, expected) in enumerate(test_cases, start=1):
         try:
             # If inputs is a tuple, unpack it; otherwise, pass it as a single argument
-            ssl = SinglyLinkedList()
             ssl.generate_list_from_array(*inputs) if isinstance(inputs, tuple) else ssl.generate_list_from_array(inputs)
-            result = []
             ssl.reverse_list()
+
+            result = []
             for i in ssl:
                 result.append(i.data)
+
             if result != expected:
                 all_passed = False
                 print(f"❌ Test {i} Failed | Input: {inputs} | Expected: {expected}, Got: {result}")

@@ -19,10 +19,10 @@ if __name__ == "__main__":
     ]
 
     all_passed = True
+    ssl = SinglyLinkedList()
     for i, (inputs, expected) in enumerate(test_cases, start=1):
         try:
             # If inputs is a tuple, unpack it; otherwise, pass it as a single argument
-            ssl = SinglyLinkedList()
             ssl.generate_list_from_array(*inputs) if isinstance(inputs, tuple) else ssl.generate_list_from_array(inputs)
             result = ssl.get_middle_node().data
             if result != expected:
