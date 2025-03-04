@@ -42,6 +42,16 @@ class SinglyLinkedList:
         self.tail = None
         self.length = 0
 
+    def __str__(self):
+        if self.length == 0:
+            raise Exception("Linked list is empty. Nothing to display.")
+        values = []
+        current = self.head
+        while current:
+            values.append(str(current.data))
+            current = current.next
+        return " -> ".join(values) + " -> None"
+
     def __iter__(self):
         current = self.head
         while current:
@@ -67,6 +77,7 @@ class SinglyLinkedList:
             self.tail = new_node
         self.length += 1
 
+
     # O(1) - point the new node to the head or assign it if no head exists
     def insert_at_end(self, data):
         new_node = self.Node(data)
@@ -79,13 +90,50 @@ class SinglyLinkedList:
             self.tail = new_node
         self.length += 1
 
+    def insert_at_position(self, data, position: int):
+        # Allow insertion from 1 up to self.length + 1 (1-indexed)
+        if position < 1 or position > self.length + 1:
+            raise Exception(f"Invalid position. Position: {position} | Allowed: 1 to {self.length + 1}.")
+        
+        # Insertion at the beginning
+        if position == 1:
+            self.insert_at_beginning(data)
+            return
+        
+        # Insertion at the end
+        if position == self.length + 1:
+            self.insert_at_end(data)
+            return
+
+        new_node = self.Node(data)
+        current = self.head
+        # Traverse to the node just before the insertion point
+        for _ in range(1, position - 1):
+            current = current.next
+
+        # Insert the new node
+        new_node.next = current.next
+        current.next = new_node
+        self.length += 1
+
     # O(n) - needs to assign new node items for each item in provided array
     def generate_list_from_array(self, array: list[int]):
+        self.length = 0
         self.head = None
         self.tail = None
         for data in array:
             self.insert_at_end(data)
-    
+
+
+    def to_array(self):
+        result = []
+        current = self.head
+        while current:
+            result.append(current.data)
+            current = current.next
+        return result
+
+
     # O(n) - the item may be at the end of the list
     def delete_node(self, key):
         if self.length == 0:
@@ -111,6 +159,7 @@ class SinglyLinkedList:
             current = current.next
 
         print("Node with key not found.")
+
 
     # O(n) - disadvantage of singly linked lists, popping must traverse entire data structure
     def pop(self):
@@ -138,16 +187,6 @@ class SinglyLinkedList:
             self.length -= 1
             return current.data
     
-    # O(n) - iterate over all items
-    def display_list(self):
-        if self.length == 0:
-            raise Exception("Linked list is empty. Nothing to display.")
-        else:
-            current = self.head
-            while current:
-                print(current.data, end=" -> ")
-                current = current.next
-            print("None")
 
     # O(n) - must traverse entire array
     def reverse_list(self):
@@ -210,7 +249,7 @@ if __name__ == "__main__":
     arr = [1,2,3,4,5]
     print("generate_list_from_array")
     sll.generate_list_from_array(arr)
-    sll.display_list()
+    print(sll)
 
     # Forward iteration using __iter__
     print("Forward iteration:")
@@ -226,23 +265,26 @@ if __name__ == "__main__":
 
     sll.delete_node(3)
     print("\ndelete_node(3)")
-    sll.display_list()
-    
+    print(sll)
+
     print("\nreverse_list()")
     sll.reverse_list()
-    sll.display_list()
+    print(sll)
 
     print("\ninsert_at_beginning(3)")
     sll.insert_at_beginning(3)
-    sll.display_list()
-    
+    print(sll)
+
     print("\ninsert_at_end(1)")
     sll.insert_at_end(1)
-    sll.display_list()
+    print(sll)
 
     print("\npop() -> " + str(sll.pop()))
-    sll.display_list()
+    print(sll)
 
     print("\nget_middle_node()")
     print(sll.get_middle_node().data)
-    sll.display_list()
+    print(sll)
+
+    print("\nto_array()")
+    print(sll.to_array())

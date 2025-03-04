@@ -25,31 +25,31 @@ if __name__ == "__main__":
 
     test_cases = [
         # Basic Anagrams
-        (("listen", "silent"), True),           # 1
-        (("test", "etts"), True),               # 2
-        (("anagram", "nagaram"), True),         # 3
-        (("rat", "tar"), True),                 # 4
+        (("listen", "silent"), True),                                 #  1
+        (("test", "etts"), True),                                     #  2
+        (("anagram", "nagaram"), True),                               #  3
+        (("rat", "tar"), True),                                       #  4
 
         # Anagrams with Numbers
-        (("abc123", "bca321"), True),           # 5
-        (("112233", "321132"), True),           # 6
-        (("12a3b4", "4b3a21"), True),           # 7
+        (("abc123", "bca321"), True),                                 #  5
+        (("112233", "321132"), True),                                 #  6
+        (("12a3b4", "4b3a21"), True),                                 #  7
 
         # Not Anagrams
-        (("abc123", "abc124"), False),          # 8 One digit is different
-        (("112233", "112334"), False),          # 9 Different frequency of digits
+        (("abc123", "abc124"), False),                                #  8 One digit is different
+        (("112233", "112334"), False),                                #  9 Different frequency of digits
 
         # Case Insensitivity
-        (("Listen123", "Silent321"), True),     # 10
-        (("Hello2022", "oLleh2202"), True),     # 11
+        (("Listen123", "Silent321"), True),                           # 10
+        (("Hello2022", "oLleh2202"), True),                           # 11
 
         # Spaces & Punctuation Ignored
-        (("Dormitory 123", "Dirty room 321"), True),  # 12
+        (("Dormitory 123", "Dirty room 321"), True),                  # 12
         (("Tom Marvolo Riddle 42", "I am Lord Voldemort 24"), True),  # 13
 
         # Different Lengths (Immediate Fail)
-        (("aa", "aaa"), False),                 # 14
-        (("", "a"), False),                     # 15
+        (("aa", "aaa"), False),                                       # 14
+        (("", "a"), False),                                           # 15
     ]
     
     run_tests(valid_anagram, test_cases)

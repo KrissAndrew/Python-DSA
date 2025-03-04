@@ -23,15 +23,15 @@ if __name__ == "__main__":
     from tests.dynamic_test_function import run_tests
 
     test_cases = [
-        (1, 1),            # 1 Single digit
-        (12, 21),          # 2 Two digits
-        (123, 321),        # 3 Normal case
-        (-123, -321),      # 4 Negative number
-        (111114111111, 111111411111),  # 5 Large number
-        (123456789, 987654321),  # 6 Large positive number
-        (-123456789, -987654321),  # 7 Large negative number
-        (0, 0),            # 8 Zero case
-        (-1, -1),          # 9 Negative single digit
+        (1, 1),                       #  1 Single digit
+        (12, 21),                     #  2 Two digits
+        (123, 321),                   #  3 Normal case
+        (-123, -321),                 #  4 Negative number
+        (111114111111, 111111411111), #  5 Large number
+        (123456789, 987654321),       #  6 Large positive number
+        (-123456789, -987654321),     #  7 Large negative number
+        (0, 0),                       #  8 Zero case
+        (-1, -1),                     #  9 Negative single digit
     ]
 
     run_tests(reverse_integer, test_cases)

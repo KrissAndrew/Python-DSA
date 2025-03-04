@@ -26,28 +26,28 @@ if __name__ == "__main__":
 
     test_cases = [
         # Basic cases
-        ("racecar", True),      # 1 Palindrome
-        ("hello", False),       # 2 Not a palindrome
-        ("", True),             # 3 Empty string is considered a palindrome
-        ("a", True),            # 4 Single character is always a palindrome
+        ("racecar", True),                         #  1: Palindrome
+        ("hello", False),                          #  2: Not a palindrome
+        ("", True),                                #  3: Empty string is considered a palindrome
+        ("a", True),                               #  4: Single character is always a palindrome
         
         # Cases with spaces and punctuation
-        ("A man, a plan, a canal, Panama!", True),   # 5 Famous palindrome with punctuation
-        ("No 'x' in Nixon", True),                   # 6 Another palindrome with mixed case and punctuation
-        ("Was it a car or a cat I saw?", True),      # 7 Contains spaces and question mark
-        ("Eva, can I see bees in a cave?", True),    # 8 Mixed case, spaces, and punctuation
+        ("A man, a plan, a canal, Panama!", True), #  5: Famous palindrome with punctuation
+        ("No 'x' in Nixon", True),                 #  6: Another palindrome with mixed case and punctuation
+        ("Was it a car or a cat I saw?", True),    #  7: Contains spaces and question mark
+        ("Eva, can I see bees in a cave?", True),  #  8: Mixed case, spaces, and punctuation
 
         # Cases with only non-alphanumeric characters
-        ("!!!", True),   # 9 Considered palindrome (since no real characters)
-        ("12321", True), # 10 Numeric palindrome
-        ("123421", False), # 11 Not a palindrome
+        ("!!!", True),                             #  9: Considered palindrome (since no real characters)
+        ("12321", True),                           # 10: Numeric palindrome
+        ("123421", False),                         # 11: Not a palindrome
 
         # Case sensitivity check
-        ("AbBa", True),  # 12 Should be case-insensitive
+        ("AbBa", True),                            # 12: Should be case-insensitive
         
         # Edge cases
-        ("a " * 5000 + "a", True),  # 13 Large palindrome
-        ("abcdefg" * 1000, False),  # 14 Large non-palindrome
+        ("a " * 5000 + "a", True),                 # 13: Large palindrome
+        ("abcdefg" * 1000, False),                 # 14: Large non-palindrome
     ]
 
     run_tests(is_palindrome, test_cases)
