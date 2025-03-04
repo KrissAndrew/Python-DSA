@@ -106,14 +106,12 @@ class SinglyLinkedList:
             return
 
         new_node = self.Node(data)
-        current = self.head
-        # Traverse to the node just before the insertion point
-        for _ in range(1, position - 1):
-            current = current.next
-
-        # Insert the new node
-        new_node.next = current.next
-        current.next = new_node
+        # Get the node just before the insertion point using the helper
+        previous = self.get_node_at_position(position - 1)
+        
+        # Insert the new node by adjusting pointers
+        new_node.next = previous.next
+        previous.next = new_node
         self.length += 1
 
     # O(n) - needs to assign new node items for each item in provided array
@@ -133,33 +131,52 @@ class SinglyLinkedList:
             current = current.next
         return result
 
-
-    # O(n) - the item may be at the end of the list
-    def delete_node(self, key):
-        if self.length == 0:
+    def delete_node(self, node: Node):
+        if not self.head:
             raise Exception("Linked list is empty. Nothing to delete.")
         
+        # If the node to delete is the head node
+        if node == self.head:
+            self.head = self.head.next
+            # If the list becomes empty after deletion, update tail
+            if self.head is None:
+                self.tail = None
+            self.length -= 1
+            return
+
         prev = None
         current = self.head
-        
-        while current:
-            if current.data == key:
-                if prev:
-                    prev.next = current.next
-                else:
-                    self.head = current.next
 
-                if current == self.tail:
-                    self.tail = prev
-        
-                self.length -= 1
-                return # Stop once done, no need to keep processing
-
+        # Traverse the list until the node is found
+        while current is not None and current != node:
             prev = current
             current = current.next
 
-        print("Node with key not found.")
+        # If the node was not found in the list, raise an exception
+        if current is None:
+            raise Exception("Provided Node not in list. Nothing to delete.")
 
+        # Delete the node by updating the previous node's next pointer
+        prev.next = current.next
+        # If the deleted node was the tail, update the tail pointer
+        if current == self.tail:
+            self.tail = prev
+
+        self.length -= 1
+
+    def delete_first_occurance(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                self.delete_node(current)
+                return  # Node deleted; exit the function
+            current = current.next
+        # Optionally, you could raise an exception here instead of printing.
+        raise Exception("Node with key not found.")
+
+    def delete_at_position(self, position: int):
+        node_to_delete = self.get_node_at_position(position)
+        self.delete_node(node_to_delete)
 
     # O(n) - disadvantage of singly linked lists, popping must traverse entire data structure
     def pop(self):
@@ -211,6 +228,14 @@ class SinglyLinkedList:
 
     def get_tail_node(self):
         if self.tail: return self.tail
+
+    def get_node_at_position(self, position: int):
+        if position < 1 or position > self.length:
+            raise Exception(f"Invalid position. Position: {position} | Allowed: 1 to {self.length}.")
+        current = self.head
+        for _ in range(1, position):
+            current = current.next
+        return current
     
     # O(N) linear running time complexity
     def get_middle_node(self):
