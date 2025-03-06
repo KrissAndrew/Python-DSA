@@ -77,7 +77,6 @@ class SinglyLinkedList:
             self.tail = new_node
         self.length += 1
 
-
     # O(1) - point the new node to the head or assign it if no head exists
     def insert_at_end(self, data):
         new_node = self.Node(data)
@@ -113,6 +112,7 @@ class SinglyLinkedList:
         new_node.next = previous.next
         previous.next = new_node
         self.length += 1
+
 
     # O(n) - needs to assign new node items for each item in provided array
     def generate_list_from_array(self, array: list[int]):
@@ -266,7 +266,58 @@ class SinglyLinkedList:
             self.tail.data = data
         else:
             raise Exception("Linked list is empty. Cannot set tail data.")
-    
+        
+    def sort(self):
+        """Sort the linked list using merge sort."""
+        if self.head is None or self.head.next is None:
+            return  # Already sorted if empty or one element
+        self.head = self._merge_sort(self.head)
+        # Update tail pointer after sorting
+        current = self.head
+        while current.next:
+            current = current.next
+        self.tail = current
+
+    def _merge_sort(self, head):
+        """Recursively sort the list starting from head and return new head."""
+        if head is None or head.next is None:
+            return head
+        
+        middle = self._get_middle(head)
+        next_to_middle = middle.next
+        middle.next = None  # Split the list into two halves
+
+        left = self._merge_sort(head)
+        right = self._merge_sort(next_to_middle)
+
+        sorted_list = self._sorted_merge(left, right)
+        return sorted_list
+
+    def _get_middle(self, head):
+        """Find the middle node of the list starting from head."""
+        if head is None:
+            return head
+        slow = head
+        fast = head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    def _sorted_merge(self, left, right):
+        """Merge two sorted linked lists and return the head of the merged list."""
+        if left is None:
+            return right
+        if right is None:
+            return left
+        
+        if left.data <= right.data:
+            result = left
+            result.next = self._sorted_merge(left.next, right)
+        else:
+            result = right
+            result.next = self._sorted_merge(left, right.next)
+        return result
 
 if __name__ == "__main__":
     # Initilize single linked list
