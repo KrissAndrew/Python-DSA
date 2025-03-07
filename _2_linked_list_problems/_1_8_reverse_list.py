@@ -3,8 +3,6 @@ if __name__ == "__main__":
 
     from overviews._2_0_singly_linked_list import SinglyLinkedList
 
-    all_passed = True
-    sll = SinglyLinkedList()
     test_cases = [
         ([], Exception),                                           #  1
         ([1], [1]),                                                #  2

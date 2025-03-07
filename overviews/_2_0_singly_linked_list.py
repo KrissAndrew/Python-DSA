@@ -301,7 +301,7 @@ class SinglyLinkedList:
         left = self._merge_sort(head)
         right = self._merge_sort(next_to_middle)
 
-        sorted_list = self._sorted_merge(left, right)
+        sorted_list = self.sorted_merge(left, right)
         return sorted_list
 
     def _get_middle(self, head):
@@ -315,7 +315,7 @@ class SinglyLinkedList:
             fast = fast.next.next
         return slow
 
-    def _sorted_merge(self, left, right):
+    def sorted_merge(self, left, right):
         """Merge two sorted linked lists and return the head of the merged list."""
         if left is None:
             return right
@@ -324,11 +324,35 @@ class SinglyLinkedList:
         
         if left.data <= right.data:
             result = left
-            result.next = self._sorted_merge(left.next, right)
+            result.next = self.sorted_merge(left.next, right)
         else:
             result = right
-            result.next = self._sorted_merge(left, right.next)
+            result.next = self.sorted_merge(left, right.next)
         return result
+    
+    def sorted_merge_iterative(self, left, right):
+        # Create a dummy node to simplify edge cases
+        dummy = self.Node(0)
+        current = dummy
+
+        # While both lists have nodes, compare and attach the smaller one.
+        while left is not None and right is not None:
+            if left.data <= right.data:
+                current.next = left
+                left = left.next
+            else:
+                current.next = right
+                right = right.next
+            current = current.next
+
+        # Attach the remaining nodes (only one of these will be non-None).
+        if left is not None:
+            current.next = left
+        else:
+            current.next = right
+
+        # The merged list is in dummy.next.
+        return dummy.next
 
 if __name__ == "__main__":
     # Initilize single linked list
