@@ -4,11 +4,11 @@ if __name__ == "__main__":
     from overviews._2_0_singly_linked_list import SinglyLinkedList
 
     test_cases = [
-        ([], 9, Exception),                                         #  1: Delete from empty list.
-        ([1], 1, 1),                                               #  2: Inserting into an empty list, invalid position
-        ([1, 2], 2, 2),                                          #  3: Delete multiple items.
-        ([1, 2, 3], 2, 2),                                     #  4: Delete central item multiple items into a non-empty list.
-        ([9, 1, 1, 1, 9], 1, 9),                             #  5: Delete multiple of same item.
+        ([], 9, Exception),      #  1: Delete from empty list.
+        ([1], 1, 1),             #  2: Inserting into an empty list, invalid position
+        ([1, 2], 2, 2),          #  3: Delete multiple items.
+        ([1, 2, 3], 2, 2),       #  4: Delete central item multiple items into a non-empty list.
+        ([9, 1, 1, 1, 9], 1, 9), #  5: Delete multiple of same item.
     ]
 
     all_passed = True
