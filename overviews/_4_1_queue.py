@@ -44,7 +44,7 @@ class Queue:
         self.head = None
         self.tail = None
         for data in array:
-            self.insert_at_end(data)
+            self.enqueue(data)
     
 
 if __name__ == "__main__":

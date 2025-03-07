@@ -1,55 +1,67 @@
-class DeQueue:
-    class Node:
-        def __init__(self, data):
-            self.data = data
-            self.next = None
+from _4_1_queue import Queue
 
-    def __init__(self):
-        self.head = None
-        self.tail = None
-        self.length = 0
-    
-    def __len__(self):
-        return self.length
+# A double ended queue (deque) contains all functionality of a queue.
+# The only addition is the ability to add items to the front of the queue.
+# This is a good example of inheritance, the deque can inherit all pre-existing functionality of the queue
 
-    def enqueue(self, data):
+class DeQueue(Queue):
+    def append_left(self, data):
+        # Create a new node using the inner Node class from the parent Queue
         new_node = self.Node(data)
-        if self.tail:
-            self.tail.next = new_node
-        else:
-            # Queue is empty, new node becomes head
-            self.head = new_node
-        self.tail = new_node
+        # Insert the new node at the beginning of the queue
+        new_node.next = self.head
+        self.head = new_node
+        
+        # If the queue was empty, update the tail to point to the new node
+        if self.length == 0:
+            self.tail = new_node
+        
+        # Increase the length of the queue
         self.length += 1
 
-    def dequeue(self):
-        if self.head is None:
-            raise Exception("Queue is empty.")
-        data = self.head.data
-        self.head = self.head.next
-        if self.head is None:
-            # Queue is now empty, update tail too
-            self.tail = None
-        self.length -= 1
-        return data
-
-    def peek(self):
-        if self.head is None:
-            raise Exception("Queue is empty.")
-        return self.head.data
-    
-    # O(n) - needs to assign new node items for each item in provided array
-    def generate_queue_from_array(self, array: list[int]):
-        self.length = 0
-        self.head = None
-        self.tail = None
-        for data in array:
-            self.insert_at_end(data)
-    
-
 if __name__ == "__main__":
-    que_ints = [1, 2, 3, 4, 5]
-    queue = DeQueue()
-    queue.generate_queue_from_array(que_ints)
-    print(queue.peek()) # 1
+    deque_ints = [1, 2, 3, 4, 5]
+    deque_strings = ["string1", "string2", "string3", "string4", "string5"]
+    deque_mixed = [True, 2, "string3", 4, True]
+
+    int_queue = DeQueue()
+    string_queue = DeQueue()
+    mixed_queue = DeQueue()
+
+    # Generate the queue from an array (inherited method)
+    int_queue.generate_queue_from_array(deque_ints)
+    print("Peek:", int_queue.peek())  # Should print 1
     
+    # Append to the left of the queue
+    int_queue.append_left(0)
+    print("Peek after append_left:", int_queue.peek())  # Now should print 2
+
+    # Dequeue to see the modified behavior if any override is applied
+    print("Dequeue:", int_queue.dequeue())
+
+        # Generate the queue from an array (inherited method)
+    string_queue.generate_queue_from_array(deque_strings)
+    print("Peek:", string_queue.peek())  # Should print 1
+    
+    # Append to the left of the queue
+    string_queue.append_left("string0")
+    print("Peek after append_left:", string_queue.peek())  # Now should print 2
+
+    # Dequeue to see the modified behavior if any override is applied
+    print("Dequeue:", string_queue.dequeue())
+
+        # Generate the queue from an array (inherited method)
+    mixed_queue.generate_queue_from_array(deque_mixed)
+    print("Peek:", mixed_queue.peek())  # Should print 1
+    
+    # Append to the left of the queue
+    mixed_queue.append_left(123)
+    print("Peek after append_left:", mixed_queue.peek())  # Now should print 123
+
+    # Dequeue to see the modified behavior if any override is applied
+    print("Dequeue:", mixed_queue.dequeue())
+
+
+
+
+

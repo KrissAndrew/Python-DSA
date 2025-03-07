@@ -52,6 +52,9 @@ class SinglyLinkedList:
             current = current.next
         return " -> ".join(values) + " -> None"
 
+    def __repr__(self):
+        return f"SinglyLinkedList({self.to_array()})"
+
     def __iter__(self):
         current = self.head
         while current:
@@ -347,8 +350,8 @@ if __name__ == "__main__":
         print(data, end=" ")
     print()
 
-    sll.delete_node(3)
-    print("\ndelete_node(3)")
+    sll.delete_first_occurance(3)
+    print("\ndelete_first_occurance(3)")
     print(sll)
 
     print("\nreverse_list()")
@@ -372,3 +375,6 @@ if __name__ == "__main__":
 
     print("\nto_array()")
     print(sll.to_array())
+
+    print(repr(sll))  # This calls sll.__repr__() behind the scenes.
+
