@@ -1,6 +1,6 @@
 ### SINGLY LINKED LIST ###
 
-# Elements (nodes) are connected via pointers, rather than stored contiguously in memory. 
+# Linked lists are data structures consisting of Elements (nodes) connected via pointers, rather than stored contiguously in memory. 
 # Allows for dynamic memory usage and can efficiently handle insertions and deletions.
 # Unlike arrays, linked lists can grow or shrink during execution, ideal when the maximum number of elements isn’t known in advance.
 
@@ -66,6 +66,9 @@ class SinglyLinkedList:
             current = current.next
         # Restore original order
         self.reverse_list()
+
+    def __len__(self):
+        return self.length
 
     # O(1) - point the new node to the head or assign it if no head exists
     def insert_at_beginning(self, data): 
@@ -175,6 +178,11 @@ class SinglyLinkedList:
         raise Exception("Node with key not found.")
 
     def delete_at_position(self, position: int):
+        """Delete node at provided position in the list
+
+        Args:
+            position (int): Position of node (1 indexed) to be deleted
+        """
         node_to_delete = self.get_node_at_position(position)
         self.delete_node(node_to_delete)
 

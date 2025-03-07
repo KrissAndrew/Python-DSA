@@ -1,6 +1,6 @@
 ### ARRAYS ###
 # In python arrays are known as lists
-# lists are mutable, their content can be changed in place.
+# lists are mutable data structures, their content can be changed in place.
 
 # When a python list is created, it is automatically allocated a chunk of contiguous memory
 # If this memory is exceeded, it will increase the list size by a multiple of the original (1.5)
