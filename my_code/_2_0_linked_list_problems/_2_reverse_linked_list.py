@@ -1,4 +1,4 @@
-# Tests for reversal of linked list
+# Test in-place (without extra memory) reversal of a singly linked list
 if __name__ == "__main__":
 
     from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList

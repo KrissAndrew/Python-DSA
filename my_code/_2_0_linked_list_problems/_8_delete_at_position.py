@@ -1,6 +1,8 @@
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
 from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
 
+# Test deletion of an item at the provided position within a singly linked list 
+
 def delete_at_position_extractor(sll, inputs):
     """Extracts the result after deleting item/s at specified positions."""
     if not isinstance(inputs, tuple) or len(inputs) != 2:

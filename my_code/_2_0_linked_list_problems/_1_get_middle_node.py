@@ -1,8 +1,4 @@
-# Construct an in-place (without extra memory) algorithm to find and return the middle node of a linked list
-# Must be O(N) (linear) running time
-# Examples: [1, 2, 3, 4] --> middle node is: 2,   [1, 2, 3, 4, 5] --> middle node is: 3
-
-# For the sake of this I will implement a find_middle_node() function in my linked list classes
+# Test in-place (without extra memory) return of middle node of a linked list
 if __name__ == "__main__":
 
     from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList

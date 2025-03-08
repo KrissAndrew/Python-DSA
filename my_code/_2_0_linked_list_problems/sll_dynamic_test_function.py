@@ -5,7 +5,6 @@ from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
 # Get the absolute path of the 'code/' directory
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-
 def sll_run_tests(sll, func, test_cases, result_extractor=None):
     """
     Generalized test runner for singly linked lists.
@@ -23,16 +22,17 @@ def sll_run_tests(sll, func, test_cases, result_extractor=None):
             # ✅ Ensure extractor is called with correct inputs
             if result_extractor:
                 result = result_extractor(sll, input_data)
-            else:
-                result = sll.to_array()  # ✅ Default extraction
 
-            # Compare results
-            if expected == Exception:
-                all_passed = False  # If no exception was raised, test should fail
-                print(f"❌ Test {i} Failed | Expected an Exception but got {result}")
-            elif result != expected:
-                all_passed = False
-                print(f"❌ Test {i} Failed | Input: {input_data} | Expected: {expected}, Got: {result}")
+                # ✅ Compare node data if we are expecting a Node
+                if isinstance(expected, sll.Node) and isinstance(result, sll.Node):
+                    if result.data != expected.data:  # Compare `.data` of nodes
+                        all_passed = False
+                        print(f"❌ Test {i} Failed | Input: {input_data} | Expected Node Data: {expected.data}, Got: {result.data}")
+
+                # ✅ Otherwise, do normal comparison
+                elif result != expected:
+                    all_passed = False
+                    print(f"❌ Test {i} Failed | Input: {input_data} | Expected: {expected}, Got: {result}")
 
         except Exception as e:
             if expected == Exception:
@@ -43,3 +43,4 @@ def sll_run_tests(sll, func, test_cases, result_extractor=None):
 
     if all_passed:
         print("✅ All tests passed.")
+

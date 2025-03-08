@@ -285,11 +285,7 @@ class SinglyLinkedList:
         if self.head is None or self.head.next is None:
             return  # Already sorted if empty or one element
 
-        print(f"Before sorting: {self.to_array()}")  # Debugging
-
         self.head = self._merge_sort(self.head)
-
-        print(f"After sorting: {self.to_array()}")  # Debugging
 
         # Update tail pointer after sorting
         current = self.head

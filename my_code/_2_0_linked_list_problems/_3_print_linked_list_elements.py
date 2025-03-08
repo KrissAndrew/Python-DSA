@@ -1,9 +1,9 @@
-# Test and implement a linked lists display/print functionality
-# For the sake of this I will implement a __str__(self) function in my linked list classes
 import io
 import sys
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
 from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
+
+# Test and implement singly linked list classes print functionality
 
 def test_display_list(sll: SinglyLinkedList, _):
     # Ensure it raises an exception when the list is empty
