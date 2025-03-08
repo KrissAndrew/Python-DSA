@@ -353,6 +353,33 @@ class SinglyLinkedList:
 
         # The merged list is in dummy.next.
         return dummy.next
+    
+    def remove_duplicates(self):
+        if self.length == 0:
+            raise Exception("Linked list is empty. Nothing to display.")
+        elif self.length == 1:
+            return self.head
+        
+        self.sort()
+        current = self.head
+
+        while current:
+            next_node = current.next
+            # Skip over duplicates
+            while next_node and current.data == next_node.data:
+                next_node = next_node.next
+                self.length -= 1  # decrease length for each duplicate removed
+
+            # If we've reached the end, update the tail pointer to the current node.
+            if next_node is None:
+                self.tail = current
+            
+            # Link the current node to the next distinct node.
+            current.next = next_node
+            current = next_node
+
+        return
+
 
 if __name__ == "__main__":
     # Initilize single linked list

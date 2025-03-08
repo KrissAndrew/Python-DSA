@@ -4,6 +4,9 @@ class Stack:
         self.stack = []
         self.max_values = []
 
+    def __len__(self):
+        return len(self.stack)
+    
     # O(1) running time
     def is_empty(self):
         return self.stack == []
@@ -31,7 +34,8 @@ class Stack:
 
     # O(1) constant running time
     def peek(self):
-        return self.stack[-1]
+        if not self.is_empty():
+            return self.stack[-1]
 
     # O(1) - python arrays track a length characteristic
     def size_stack(self):
