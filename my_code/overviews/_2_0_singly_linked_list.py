@@ -51,7 +51,7 @@ class SinglyLinkedList:
         while current:
             values.append(str(current.data))
             current = current.next
-        return " → ".join(values) + " → None"
+        return "None → " + " → ".join(values) + " → None"
 
 
     def __repr__(self):
@@ -129,7 +129,6 @@ class SinglyLinkedList:
         self.tail = None
         for data in array:
             self.insert_at_end(data)
-
 
     def to_array(self):
         result = []

@@ -11,13 +11,21 @@ def equalise_stacks_extractor(inputs):
     
     list1, list2, list3 = inputs  # Unpack (list1, list2)
 
-    s1, s2, s3 = Stack(), Stack(), Stack()  # Create two linked lists
-    s1.generate_stack_from_array(list1)
-    s2.generate_stack_from_array(list2)
-    s3.generate_stack_from_array(list3)
+    s1 = Stack.generate_stack_from_array(list1)
+    s2 = Stack.generate_stack_from_array(list2)
+    s3 = Stack.generate_stack_from_array(list3)
 
     # Stack equalisation logic here
-    
+    # The problem treats the stacks weird, and wants me treats the left as the top, so I will reverse them
+
+    s1.reverse_stack()
+    s2.reverse_stack()
+    s3.reverse_stack()
+
+    # Problems
+    # 1 you can only remove the top item
+    # 2 there are different combination potentials you need to check for
+
 
     return sum(s1.stack) == sum(s2.stack) == sum(s3.stack)  # Compare the lists
 

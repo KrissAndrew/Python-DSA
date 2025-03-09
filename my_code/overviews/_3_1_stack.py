@@ -11,7 +11,13 @@ class Stack:
         if len(self) == 0:
             return "Empty list"  # Instead of raising an exception
         return str(self.stack)
-    
+        
+    def __reversed__(self):
+        reversed_stack = Stack()
+        reversed_stack.stack = list(reversed(self.stack))
+        reversed_stack.max_values = list(reversed(self.max_values))
+        return reversed_stack
+
     # O(1) running time
     def is_empty(self):
         return not self.stack
@@ -53,10 +59,19 @@ class Stack:
             self.push(data)
         return self
     
+    def reverse_stack(self):
+        self.stack = list(reversed(self.stack))
+        self.max_values = list(reversed(self.max_values))
+
+    
 if __name__ == "__main__":
     s1 = Stack().generate_stack_from_array([3, 2, 1, 1, 1])
     s2 = Stack().generate_stack_from_array([4, 3, 2])
     s3 = Stack().generate_stack_from_array([1, 1, 4, 1])
+
+    s1.reverse_stack()
+    s2.reverse_stack()
+    s3.reverse_stack()
 
     print(s1)
     print(s2)

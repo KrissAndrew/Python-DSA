@@ -49,6 +49,16 @@ class DoublyLinkedList:
             yield current.data
             current = current.prev
 
+    def __str__(self):
+        if self.length == 0:
+            return "Empty list"  # Instead of raising an exception
+        values = []
+        current = self.head
+        while current:
+            values.append(str(current.data))
+            current = current.next
+        return "None → " + " ↔ ".join(values) + " → None"
+
     # O(1) - simple, only change needed it updating head.prev to new
     def insert_at_beginning(self, data):
         new_node = self.Node(data)
@@ -71,7 +81,8 @@ class DoublyLinkedList:
             self.head = new_node
             self.tail = new_node
         self.length += 1
-        
+
+
     def delete_node(self, key):
         if self.length == 0:
             print("Linked list is empty. Nothing to delete.")
@@ -128,20 +139,139 @@ class DoublyLinkedList:
             self.length -= 1
             return self.tail.data
 
-    def display_list(self):
-        if self.length == 0:
-            print("Linked list is empty. Nothing to display.")
+    # Utility function to find the middle of a linked list (for merge sort)
+    def get_middle(self, head):
+        if not head:
+            return head
+
+        slow = head
+        fast = head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow
+
+    # Merge two sorted sublists
+    def merge_sorted_lists(self, left, right):
+        if not left:
+            return right
+        if not right:
+            return left
+
+        if left.data <= right.data:
+            result = left
+            result.next = self.merge_sorted_lists(left.next, right)
+            if result.next:
+                result.next.prev = result
         else:
-            print("None", end=" <-> ")
-            current = self.head
-            while current:
-                print(current.data, end=" <-> ")
-                current = current.next
-            print("None")
+            result = right
+            result.next = self.merge_sorted_lists(left, right.next)
+            if result.next:
+                result.next.prev = result
+
+        return result
+
+    # Merge Sort Algorithm for DLL
+    def merge_sort(self, head):
+        if not head or not head.next:
+            return head  # Base case: 0 or 1 element in list
+
+        middle = self.get_middle(head)
+        next_to_middle = middle.next
+        middle.next = None  # Split the list into two halves
+
+        left = self.merge_sort(head)
+        right = self.merge_sort(next_to_middle)
+
+        return self.merge_sorted_lists(left, right)
+
+    # Sort the doubly linked list
+    def sort_list(self):
+        if not self.head or not self.head.next:
+            return  # List is already sorted (0 or 1 element)
+
+        self.head = self.merge_sort(self.head)
+
+        # Reset the tail pointer after sorting
+        current = self.head
+        while current.next:
+            current = current.next
+        self.tail = current
+        self.sorted = True
+
+
+    def sorted_insert(self, data):
+        """ Inserts a node in a sorted manner into a doubly linked list. """
+        new_node = self.Node(data)
+
+        # Case 1: If the list is empty, set the head and tail
+        if not self.head:
+            self.head = new_node
+            self.tail = new_node
+            return
+
+        # Case 2: Insert at the beginning if it's smaller than the head node
+        if data <= self.head.data:  # Allow duplicates at the start
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+            return
+
+        current = self.head
+
+        # Traverse to find the correct insertion point
+        while current.next and current.data <= data:  # Allow insertion after duplicates
+            current = current.next
+
+        # Case 3: Insert at the end
+        if not current.next and current.data <= data:
+            current.next = new_node
+            new_node.prev = current
+            self.tail = new_node
+            return
+
+        # Case 4: Insert in the middle
+        prev_node = current.prev
+        prev_node.next = new_node
+        new_node.prev = prev_node
+        new_node.next = current
+        current.prev = new_node
+
+
+
+    def display_list(self):
+        if not self.head:
+            print("Linked list is empty.")
+            return
+        print("None", end=" → ")
+
+        current = self.head
+        while current:
+            if current.next:  # If there's another node ahead, use ↔
+                print(current.data, end=" ↔ ")
+            else:  # Last node, use → None
+                print(current.data, end=" → None")
+            current = current.next
+
+        print()  # Newline for better formatting
+
     
-    def generate_list_from_array(self, array):
+    # O(n) - needs to assign new node items for each item in provided array
+    def generate_list_from_array(self, array: list[int]):
+        self.length = 0
+        self.head = None
+        self.tail = None
         for data in array:
             self.insert_at_end(data)
+
+    def to_array(self):
+        result = []
+        current = self.head
+        while current:
+            result.append(current.data)
+            current = current.next
+        return result
 
     def reverse_list(self):
         if self.length == 0:
@@ -163,7 +293,7 @@ if __name__ == "__main__":
     arr = [1,2,3,4,5]
     print("generate_list_from_array")
     dll.generate_list_from_array(arr)
-    dll.display_list()
+    print(dll)
     
     # Forward iteration using __iter__
     print("Forward iteration:")
@@ -179,20 +309,36 @@ if __name__ == "__main__":
     
     dll.delete_node(3)
     print("\ndelete_node(3)")
-    dll.display_list()
+    print(dll)
     
     print("\nreverse_list()")
     dll.reverse_list()
-    dll.display_list()
+    print(dll)
 
     print("\ninsert_at_beginning(3)")
     dll.insert_at_beginning(3)
-    dll.display_list()
+    print(dll)
     
     print("\ninsert_at_end(1)")
     dll.insert_at_end(1)
-    dll.display_list()
+    print(dll)
 
     print("\npop() -> " + str(dll.pop()))
-    dll.display_list()
+    print(dll)
+
+    arr = [4, 2, 5, 1, 3]
+    
+    print("Inserting elements:")
+    for num in arr:
+        dll.insert_at_end(num)
+    
+    print(dll)
+
+    print("\nSorting list...")
+    dll.sort_list()
+    print(dll)
+
+    dll.sorted_insert(1)
+    print(dll)
+
 
