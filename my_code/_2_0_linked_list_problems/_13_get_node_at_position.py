@@ -1,5 +1,5 @@
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
-from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
+from my_code._2_0_linked_list_problems.sll_dynamic_test_function import run_sll_tests
 
 def get_at_position_extractor(sll, inputs):
     """Extracts the node at the given position."""
@@ -23,4 +23,4 @@ if __name__ == "__main__":
         (([9, 1, 1, 1, 9], (1,)), SinglyLinkedList.Node(9)),  # 5: Get first node.
     ]
 
-    sll_run_tests(SinglyLinkedList(), None, test_cases, get_at_position_extractor)
+    run_sll_tests(SinglyLinkedList(), None, test_cases, get_at_position_extractor)

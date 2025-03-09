@@ -1,5 +1,5 @@
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
-from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
+from my_code._2_0_linked_list_problems.sll_dynamic_test_function import run_sll_tests
 
 # Test sorting of a singly linked list 
 if __name__ == "__main__":
@@ -14,4 +14,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    sll_run_tests(sll, sll.sort, test_cases)
+    run_sll_tests(sll, sll.sort, test_cases)

@@ -4,7 +4,7 @@ from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList  # Ensure
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-def sll_run_tests(sll, func, test_cases, result_extractor=None):
+def run_sll_tests(sll, func, test_cases, result_extractor=None):
     """
     Generalized test runner for singly linked lists.
     """

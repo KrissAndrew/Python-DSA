@@ -7,16 +7,18 @@ class Stack:
     def __len__(self):
         return len(self.stack)
     
+    def __str__(self):
+        if len(self) == 0:
+            return "Empty list"  # Instead of raising an exception
+        return str(self.stack)
+    
     # O(1) running time
     def is_empty(self):
-        return self.stack == []
+        return not self.stack
 
     # O(1) running time
     def push(self, data):
-        if self.is_empty():
-            self.max_values.append(data) # If empty value will always be max
-
-        elif data >= self.max_values[-1]:
+        if self.is_empty() or data >= self.max_values[-1]:
             self.max_values.append(data)
         self.stack.append(data)
 
@@ -34,21 +36,28 @@ class Stack:
 
     # O(1) constant running time
     def peek(self):
-        if not self.is_empty():
-            return self.stack[-1]
+        return self.stack[-1] if self.stack else None
 
     # O(1) - python arrays track a length characteristic
     def size_stack(self):
         return len(self.stack)
     
     def max_value(self):
-        if not self.is_empty():
-            return self.max_values[-1]
-        return None
-    
+        return self.max_values[-1] if self.max_values else None
+
     # O(n) - needs to assign new node items for each item in provided array
     def generate_stack_from_array(self, array: list[int]):
+        if not array:
+            return self  # Return self for method chaining
         for data in array:
             self.push(data)
-        return True
+        return self
     
+if __name__ == "__main__":
+    s1 = Stack().generate_stack_from_array([3, 2, 1, 1, 1])
+    s2 = Stack().generate_stack_from_array([4, 3, 2])
+    s3 = Stack().generate_stack_from_array([1, 1, 4, 1])
+
+    print(s1)
+    print(s2)
+    print(s3)

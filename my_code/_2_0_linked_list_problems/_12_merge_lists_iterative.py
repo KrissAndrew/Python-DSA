@@ -1,5 +1,5 @@
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
-from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
+from my_code._2_0_linked_list_problems.sll_dynamic_test_function import run_sll_tests
 
 # Test merging of two sorted singly linked lists.
 
@@ -37,4 +37,4 @@ if __name__ == "__main__":
         (([3, 2, 1], [4, 5, 6]), [1, 2, 3, 4, 5, 6]),  # 5: Merging [3, 2, 1] and [4, 5, 6] → [1, 2, 3, 4, 5, 6]
     ]
 
-    sll_run_tests(SinglyLinkedList(), None, test_cases, merge_extractor)
+    run_sll_tests(SinglyLinkedList(), None, test_cases, merge_extractor)

@@ -1,5 +1,5 @@
 from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
-from my_code._2_0_linked_list_problems.sll_dynamic_test_function import sll_run_tests
+from my_code._2_0_linked_list_problems.sll_dynamic_test_function import run_sll_tests
 
 # Test insertion of an item at the start of a singly linked list 
 
@@ -25,4 +25,4 @@ if __name__ == "__main__":
         (([1, 2, 3], []), False),  # 4: One list is empty → not equal
     ]
 
-    sll_run_tests(None, None, test_cases, compare_linked_lists_extractor)  # No need for sll
+    run_sll_tests(None, None, test_cases, compare_linked_lists_extractor)  # No need for sll
