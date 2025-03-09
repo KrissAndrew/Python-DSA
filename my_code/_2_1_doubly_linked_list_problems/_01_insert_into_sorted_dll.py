@@ -1,5 +1,5 @@
 from my_code.overviews._2_1_doubly_linked_list import DoublyLinkedList
-from my_code._2_0_linked_list_problems.sll_dynamic_test_function import run_sll_tests
+from my_code._2_1_doubly_linked_list_problems.dll_dynamic_test_function import run_dll_tests
 
 # Test insertion of an item at the beginning of a singly linked list
 
@@ -27,16 +27,11 @@ if __name__ == "__main__":
         (([10, 20], 30), [10, 20, 30]), #  6: Double digits.
         (([7, 8, 9], 8), [7, 8, 8, 9]), #  7: Same number insert.
         (([0], 0), [0, 0]),             #  8: Zero insert.
-        (([1000000, 
-           2000000, 
-           3000000], 
+        (([1000000, 2000000, 3000000],
            2500000), 
-          [1000000, 
-           2000000, 
-           2500000, 
-           3000000]),                   #  9: Large digits.
+          [1000000, 2000000, 2500000, 3000000]), #  9: Large digits.
     ]
 
 
     dll = DoublyLinkedList()
-    run_sll_tests(dll, None, test_cases, insert_into_sorted_extractor)
+    run_dll_tests(dll, None, test_cases, insert_into_sorted_extractor)

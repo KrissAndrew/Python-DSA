@@ -4,7 +4,7 @@ from my_code.overviews._2_1_doubly_linked_list import DoublyLinkedList
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-def run_sll_tests(dll, func, test_cases, result_extractor=None):
+def run_dll_tests(dll, func, test_cases, result_extractor=None):
     """
     Generalized test runner for singly linked lists.
     """

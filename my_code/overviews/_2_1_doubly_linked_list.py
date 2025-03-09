@@ -275,7 +275,7 @@ class DoublyLinkedList:
 
     def reverse_list(self):
         if self.length == 0:
-            print("Linked list is empty. Nothing to reverse.")
+            Exception("Linked list is empty. Nothing to reverse.")
         else:
             current = self.head
             while current:
