@@ -14,5 +14,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    print("Running tests for remove_duplicates()...")
     sll_run_tests(sll, sll.remove_duplicates, test_cases)

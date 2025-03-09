@@ -25,5 +25,4 @@ if __name__ == "__main__":
         (([1, 2, 3], []), False),  # 4: One list is empty → not equal
     ]
 
-    print("Running tests for linked list comparison...")
     sll_run_tests(None, None, test_cases, compare_linked_lists_extractor)  # No need for sll

@@ -28,5 +28,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    print("Running tests for delete_at_position()...")
     sll_run_tests(sll, None, test_cases, delete_at_position_extractor)

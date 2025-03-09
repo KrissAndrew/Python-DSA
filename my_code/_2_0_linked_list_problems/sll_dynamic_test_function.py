@@ -1,9 +1,8 @@
 import sys
 import os
-from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList
+from my_code.overviews._2_0_singly_linked_list import SinglyLinkedList  # Ensure you import correctly
 
-# Get the absolute path of the 'code/' directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 def sll_run_tests(sll, func, test_cases, result_extractor=None):
     """
@@ -13,18 +12,20 @@ def sll_run_tests(sll, func, test_cases, result_extractor=None):
 
     for i, (input_data, expected) in enumerate(test_cases, start=1):
         try:
-            sll.generate_list_from_array(input_data if isinstance(input_data, list) else input_data[0])
+            # ✅ Only initialize the list if `sll` is not None
+            if sll is not None:
+                sll.generate_list_from_array(input_data if isinstance(input_data, list) else input_data[0])
 
-            # ✅ If func exists, call it
-            if func:
+            # ✅ Call function if provided and `sll` is not None
+            if func and sll is not None:
                 getattr(sll, func.__name__)()
 
-            # ✅ Ensure extractor is called with correct inputs
+            # ✅ Ensure extractor is called correctly
             if result_extractor:
-                result = result_extractor(sll, input_data)
+                result = result_extractor(sll, input_data) if sll is not None else result_extractor(input_data)
 
                 # ✅ Compare node data if we are expecting a Node
-                if isinstance(expected, sll.Node) and isinstance(result, sll.Node):
+                if isinstance(expected, SinglyLinkedList.Node) and isinstance(result, SinglyLinkedList.Node):
                     if result.data != expected.data:  # Compare `.data` of nodes
                         all_passed = False
                         print(f"❌ Test {i} Failed | Input: {input_data} | Expected Node Data: {expected.data}, Got: {result.data}")
@@ -43,4 +44,3 @@ def sll_run_tests(sll, func, test_cases, result_extractor=None):
 
     if all_passed:
         print("✅ All tests passed.")
-

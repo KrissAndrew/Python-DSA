@@ -14,5 +14,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    print("Running tests for reverse_list()...")
     sll_run_tests(sll, sll.sort, test_cases)

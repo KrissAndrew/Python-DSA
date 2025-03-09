@@ -37,5 +37,4 @@ if __name__ == "__main__":
         (([3, 2, 1], [4, 5, 6]), [1, 2, 3, 4, 5, 6]),  # 5: Merging [3, 2, 1] and [4, 5, 6] → [1, 2, 3, 4, 5, 6]
     ]
 
-    print("Running tests for sorted_merge_iterative()...")
     sll_run_tests(SinglyLinkedList(), None, test_cases, merge_extractor)

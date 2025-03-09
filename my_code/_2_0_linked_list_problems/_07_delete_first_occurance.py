@@ -20,8 +20,6 @@ def delete_first_occurance_extractor(sll, inputs):
 # Test insertion of an item at the start of a singly linked list 
 if __name__ == "__main__":
 
-    from overviews._2_0_singly_linked_list import SinglyLinkedList
-
     test_cases = [
         (([], (9,)), Exception),                                         #  1: Delete from empty list.
         (([1], (1,)), []),                                               #  2: Inserting into an empty list, invalid position
@@ -32,5 +30,4 @@ if __name__ == "__main__":
 
     all_passed = True
     sll = SinglyLinkedList()
-    print("Running tests for delete_first_occurance()...")
     sll_run_tests(sll, None, test_cases, delete_first_occurance_extractor)

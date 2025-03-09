@@ -32,5 +32,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    print("Running tests for insert_at_position()...")
     sll_run_tests(sll, None, test_cases, insert_at_position_extractor)

@@ -23,5 +23,4 @@ if __name__ == "__main__":
         (([9, 1, 1, 1, 9], (1,)), SinglyLinkedList.Node(9)),  # 5: Get first node.
     ]
 
-    print("Running tests for get_node_at_position()...")
     sll_run_tests(SinglyLinkedList(), None, test_cases, get_at_position_extractor)

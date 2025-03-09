@@ -28,5 +28,4 @@ if __name__ == "__main__":
     ]
 
     sll = SinglyLinkedList()
-    print("Running tests for list print functionality...")
     sll_run_tests(sll, None, test_cases, test_display_list)

@@ -17,10 +17,7 @@ def insert_at_beginning_extractor(sll, inputs):
 
     return sll.to_array()  # Convert to array for comparison
 
-# Test insertion of an item at the start of a singly linked list 
 if __name__ == "__main__":
-
-    from overviews._2_0_singly_linked_list import SinglyLinkedList
 
     test_cases = [
         (([], (1,)), [1]),                                #  1: Inserting into an empty list.
@@ -37,5 +34,4 @@ if __name__ == "__main__":
 
 
     sll = SinglyLinkedList()
-    print("Running tests for insert_at_beginning()...")
     sll_run_tests(sll, None, test_cases, insert_at_beginning_extractor)
