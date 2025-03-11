@@ -2,6 +2,7 @@ class Stack:
     
     def __init__(self):
         self.stack = []
+        self.total = 0
         self.max_values = []
 
     def __len__(self):
@@ -27,6 +28,7 @@ class Stack:
         if self.is_empty() or data >= self.max_values[-1]:
             self.max_values.append(data)
         self.stack.append(data)
+        self.total += data
 
     # O(1) because we manipulate the last item
     def pop(self):
@@ -38,6 +40,7 @@ class Stack:
         del self.stack[-1]
         if self.max_values[-1] == data:
             del self.max_values[-1]
+        self.total -= data
         return data
 
     # O(1) constant running time
@@ -60,8 +63,16 @@ class Stack:
         return self
     
     def reverse_stack(self):
-        self.stack = list(reversed(self.stack))
-        self.max_values = list(reversed(self.max_values))
+        # Reverse the main stack
+        self.stack.reverse()
+        
+        # Rebuild max_values from the reversed stack
+        self.max_values = []
+        current_max = float('-inf')
+        for value in self.stack:
+            if value >= current_max:
+                self.max_values.append(value)
+                current_max = value
 
     
 if __name__ == "__main__":
