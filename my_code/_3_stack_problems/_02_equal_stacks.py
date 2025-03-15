@@ -2,42 +2,34 @@ from my_code.overviews._3_1_stack import Stack
 from my_code._3_stack_problems.stack_dynamic_test_function import run_stack_tests
 
 def equalise_stacks_extractor(inputs):
-    """Equalise three stacks and return their common height.
-    
-    The stacks are provided as lists with the top on the left.
-    This function builds a Stack for each list, reverses them
-    (so the pop() method removes the 'top' element correctly),
-    and iteratively pops from the tallest stack until all three 
-    stacks have equal total height. If no equal height can be achieved,
-    it returns 0.
+    """Equalise three stacks (lists with top on left) by removing elements from the tallest 
+       until all stacks have the same height. Returns the common height or 0 if not possible.
     """
     if not isinstance(inputs, tuple) or len(inputs) != 3:
-        raise ValueError(f"Invalid input format for linked list comparison: {inputs}")
+        raise ValueError(f"Invalid input format for equalise_stacks: {inputs}")
     
-    list1, list2, list3 = inputs  # Unpack the three stack lists
+    list1, list2, list3 = inputs  # Unpack three stacks
     s1 = Stack()
     s2 = Stack()
     s3 = Stack()
-    s1.generate_stack_from_array(list1)
-    s2.generate_stack_from_array(list2)
-    s3.generate_stack_from_array(list3)
+    s1.generate_stack_from_array(list1)  # Build stack from list1
+    s2.generate_stack_from_array(list2)  # Build stack from list2
+    s3.generate_stack_from_array(list3)  # Build stack from list3
 
-    # Reverse stacks to account for the fact that the provided lists
-    # have the top on the left. After reversing, pop() will remove
-    # the top element correctly (i.e., from the right end).
+    # Reverse stacks so pop() removes the correct top element
     s1.reverse_stack()
     s2.reverse_stack()
     s3.reverse_stack()
 
-    # Early exit cases
-    # If the stacks are already equal, return the total immediately.
+    # If stacks are already equal, return the height immediately
     if s1.total == s2.total == s3.total:
         return s1.total
-    
+
+    # If any stack is empty, equal height can't be achieved
     if any(total == 0 for total in [s1.total, s2.total, s3.total]):
         return 0
 
-    # Iteratively pop from the stack with the highest total until all totals equalize.
+    # Remove top elements from the tallest stack until all totals equalize
     while not (s1.total == s2.total == s3.total):
         if s1.total >= s2.total and s1.total >= s3.total:
             s1.pop()
@@ -46,46 +38,20 @@ def equalise_stacks_extractor(inputs):
         else:
             s3.pop()
 
-    # If the stack becomes empty, return 0.
+    # Return 0 if the stack is empty; otherwise, return the common height
     if not s1.stack: 
         return 0 
-    return s1.total  # Return the common total height
+    return s1.total
 
 if __name__ == "__main__":
+
     test_cases = [
-        # Test Case 1: Already equal stacks.
-        # All three stacks have the same total height (1+1+1 = 3), so no removals are necessary.
-        (([1, 1, 1], [1, 1, 1], [1, 1, 1]), 3),
-        
-        # Test Case 2: Example provided.
-        # Stacks: 
-        #   - [3, 2, 1, 1, 1]  (total = 8)
-        #   - [4, 3, 2]        (total = 9)
-        #   - [1, 1, 4, 1]     (total = 7)
-        # After a series of removals, all stacks equalize at a height of 5.
-        (([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]), 5),
-        
-        # Test Case 3: One empty stack.
-        # When one of the stacks is empty, the only possible equal height is 0.
-        (([], [1, 2, 3], [1, 1, 1]), 0),
-        
-        # Test Case 4: Multiple removals required.
-        # Stacks: 
-        #   - [3, 3, 3]          (total = 9)
-        #   - [4, 2, 2, 2]       (total = 10)
-        #   - [1, 1, 4, 1, 1]    (total = 8)
-        # Removing the appropriate top elements leads to an equalized height of 6.
-        (([3, 3, 3], [4, 2, 2, 2], [1, 1, 4, 1, 1]), 6),
-        
-        # Test Case 5: Large differences requiring full reduction.
-        # Stacks: 
-        #   - [1, 2, 3, 4, 5]  (total = 15)
-        #   - [3, 3, 3, 3]     (total = 12)
-        #   - [10]             (total = 10)
-        # In this scenario, removals must continue until all stacks are reduced to 0.
-        (([1, 2, 3, 4, 5], [3, 3, 3, 3], [10]), 0),
+        (([1, 1, 1], [1, 1, 1], [1, 1, 1]), 3),           #  1: Already equal stacks (total 3)
+        (([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]), 5),  #  2: Equalise to 5 after removals
+        (([], [1, 2, 3], [1, 1, 1]), 0),                  #  3: One empty stack yields 0
+        (([3, 3, 3], [4, 2, 2, 2], [1, 1, 4, 1, 1]), 6),  #  4: Equalise to 6 after several removals
+        (([1, 2, 3, 4, 5], [3, 3, 3, 3], [10]), 0),       #  5: Removals reduce stacks to 0
     ]
 
-    # run_stack_tests executes the tests using our equalise_stacks_extractor function.
-    # It compares the returned height with the expected height.
+    # Run tests using equalise_stacks_extractor
     run_stack_tests(None, None, test_cases, equalise_stacks_extractor)

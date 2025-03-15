@@ -6,7 +6,7 @@ from my_code._2_1_doubly_linked_list_problems.dll_dynamic_test_function import r
 def insert_into_sorted_extractor(dll, inputs):
     """ Extracts the result after inserting multiple items at the end. """
     if not isinstance(inputs, tuple) or len(inputs) != 2:
-        raise ValueError(f"Invalid input format for insert_at_end: {inputs}")
+        raise ValueError(f"Invalid input format for insert_into_sorted_dll: {inputs}")
     
     initial_values, to_insert = inputs  # Unpack ([], (1, 2, 3))
 
