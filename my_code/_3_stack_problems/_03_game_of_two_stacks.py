@@ -1,3 +1,5 @@
+from my_code._3_stack_problems.stack_dynamic_test_function import run_stack_tests
+
 def game_of_two_stacks_extractor(inputs):
     """Given two stacks (represented as lists) and a maximum sum, return the maximum number of pop operations
        (from the top of either stack) such that the cumulative sum of popped values does not exceed max_pop.
@@ -56,5 +58,4 @@ if __name__ == "__main__":
         (([4, 2, 4, 6, 1, 1, 2], [2, 1, 8, 5, 3, 1], 20), 7)  # 10: Complex case; mixing pops from both stacks yields 7 moves.
     ]
 
-    from my_code._3_stack_problems.stack_dynamic_test_function import run_stack_tests
     run_stack_tests(None, None, test_cases, game_of_two_stacks_extractor)
